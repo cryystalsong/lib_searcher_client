@@ -1,6 +1,6 @@
 let results = null;
 let results_done = false;
-let api_url = "https://libsearcher.herokuapp.com";
+let api_url = "https://libsearcherapi.herokuapp.com";
 
 const searchLibrary = () => {
     $("#card-group")[0].innerHTML= "";
