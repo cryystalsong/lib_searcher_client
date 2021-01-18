@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css" rel="stylesheet" />
+    <title>Library Searcher</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
+    
+
+    <script src="./search.js"></script>   
+    
+    <script id="template" type="x-tmpl-mustache">
+        <div class="card">
+            <a href={{book_link}} target="_parent">
+                <div class="card mb-4" style="max-width: 50rem">
+                    <div class="row g-0">
+                        <div class="col-md-3">
+                            <img src={{img_src}}
+                            alt="..." class="content-img" style="max-width:150px;max-height:200px;width:auto;height:auto"/>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="content-body">
+                                <h5 class="content-title">{{title}}</h5>
+                                <h6 class="content-author">{{author}}</h6>
+                                <p class="card-text">
+                                    <small class="content-type-detail">{{book_type_detail}}</small>
+                                </p>
+                                <div class="row">
+                                    <h6 class="content-availability col-md">{{availability}}</h6>
+                                    <div class="col-md">
+                                        <img src={{lib_logo}} style="max-width:100px;max-height:55px;width:auto;height:auto" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </script>
+    
+</head>
+
+<body>
+
+    <div class="library-checkboxes">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="VPL" id="" checked />
+            <label class="form-check-label" for="flexCheckChecked">
+                Vancouver Public Library
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="BPL" id="" />
+            <label class="form-check-label" for="flexCheckDefault">
+                Burnaby Public Library
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="NWPL" id="" />
+            <label class="form-check-label" for="flexCheckDefault">
+                New Westminster Public Library
+            </label>
+        </div>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="RPL" id="" />
+            <label class="form-check-label" for="flexCheckDefault">
+                Richmond Public Library
+            </label>
+        </div>
+    </div>
+
+    <div class="input-group justify-content-center">
+        <div class="form-outline">
+            <input id="search-input" type="search" id="form1" class="form-control" />
+            <label class="form-label" for="form1">Search your libraries</label>
+        </div>
+        <button id="search-button" type="button" class="btn btn-primary" onclick="searchLibrary()">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <div class="justify-content-center" id="card-group">
+    </div>
+
+</body>
+
+</html>
