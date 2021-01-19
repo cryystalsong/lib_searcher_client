@@ -80,6 +80,22 @@ const searchLibrary = () => {
     
                     createContentCards(result["results"], library);
                     
+                    currentPage = result["currentPage"]
+                    totalPages = result["totalPages"]
+
+                    console.log(search_url);
+
+                    if (currentPage != totalPages) {
+                        $("#card-group").append(
+                            `<button type="button" 
+                                class="btn btn-primary" 
+                                id="${library}-see-more" 
+                                onclick="seeMore(library, currentPage, totalPages)">
+                                    See More from ${library}
+                                </button>`
+                        );
+                    } 
+                    
                     // when results from all libraries are shown 
                     if (index === libraries.length - 1) {
                         $("#loading").hide();
