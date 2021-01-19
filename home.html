@@ -18,7 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"></script>
     
 
-    <script src="./search.js"></script>   
+    <script src="search.js"></script>   
+    <link rel="stylesheet" href="style.css">
     
     <script id="template" type="x-tmpl-mustache">
         <div class="card">
@@ -84,7 +85,7 @@
         </div>
     </div>
 
-    <div class="input-group justify-content-center">
+    <div class="input-group justify-content-center" id="main-searchbar">
         <div class="form-outline">
             <input id="search-input" type="search" id="form1" class="form-control" />
             <label class="form-label" for="form1">Search your libraries</label>
@@ -94,7 +95,14 @@
         </button>
     </div>
 
-    <div class="justify-content-center" id="card-group">
+    <div class="text-center" id="loading" style="display: none">
+        <strong>Fetching results from your libraries...</strong>
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+    <div id="card-group" >        
     </div>
 
 </body>
