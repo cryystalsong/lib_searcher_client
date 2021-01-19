@@ -23,6 +23,7 @@ const searchLibrary = () => {
 
     libraries.forEach(library => {
         var lib_logo = library_logo_src[library];
+    $("#loading").show();
 
         $.ajax({
             url: `${api_url}/search/?library=${library}&search_keywords=${search_query}`,
@@ -33,9 +34,9 @@ const searchLibrary = () => {
                     var template = document.getElementById('template').innerHTML;
                     content["lib_logo"] = lib_logo;
 
-                    var rendered = Mustache.render(template, content);
-                    $("#card-group").append(rendered);                      
-                });
+                    // when results from all libraries are shown 
+                    if (index === libraries.length - 1) {
+                        $("#loading").hide();
 
             }
         });
