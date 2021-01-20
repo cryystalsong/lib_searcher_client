@@ -182,6 +182,15 @@ const searchLibrary = () => {
                         $("#loading").hide();
                     }
                 }
+            },
+            error: function () {                
+                $("#loading").hide();
+                $("#card-group")
+                        .append($(`<h3 class="error-msg">`)
+                        .text(
+                            `Currently having some server trouble.. please check back later :( sorry`
+                            )
+                        );
             }
         });
     });
