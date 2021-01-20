@@ -47,7 +47,7 @@ const createContentCards = (results, library) => {
 }
 
 const generateSearchAPI = (library, page=null) => {    
-    search_query = $("#search-input")[0].value;
+    let search_query = $("#search-input")[0].value;
     search_query = search_query.replace(/ /g, "+");
 
     if (page) {
@@ -57,8 +57,8 @@ const generateSearchAPI = (library, page=null) => {
 }
 
 const seeMore = (library) => {
-    current_result_count = libraryCounts[library]["current_result_count"]  
-    total_result_count = libraryCounts[library]["total_result_count"]  
+    let current_result_count = libraryCounts[library]["current_result_count"]  
+    let total_result_count = libraryCounts[library]["total_result_count"]  
 
     if (current_result_count < total_result_count) {
         $(`#${library}-loading`).show();
@@ -128,7 +128,7 @@ const searchLibrary = () => {
     
                     createContentCards(result["results"], library);
                     
-                    current_page = result["current_page"]
+                    let current_page = result["current_page"]
                     
                     libraryCounts[library] = {}
 

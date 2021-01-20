@@ -66,6 +66,9 @@
 <body>
 
     <div class="library-checkboxes">
+
+        <h4> Which libraries do you want to search? </h4>
+
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="VPL" id="" checked />
             <label class="form-check-label" for="flexCheckChecked">
@@ -95,14 +98,16 @@
         </div>
     </div>
 
-    <div class="input-group justify-content-center" id="main-searchbar">
-        <div class="form-outline">
-            <input id="search-input" type="search" id="form1" class="form-control" />
-            <label class="form-label" for="form1">Search your libraries</label>
-        </div>
-        <button id="search-button" type="button" class="btn btn-primary" onclick="searchLibrary()">
-            <i class="fas fa-search"></i>
-        </button>
+    <div class="input-group" id="main-searchbar">
+        <h4> What are you looking for? </h4>
+        <div class="input-group rounded">
+            <input type="search" id="search-input" class="form-control rounded" placeholder="Search" aria-label="Search"
+              aria-describedby="search-addon" />
+
+            <span class="input-group-text border-0" id="search-addon" onclick="searchLibrary()">
+              <i class="fas fa-search"></i>
+            </span>
+        </div>    
     </div>
 
     <div id="card-group" >        
