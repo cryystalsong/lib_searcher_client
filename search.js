@@ -89,12 +89,32 @@ const seeMore = (library) => {
     }
 }
 
-const searchLibrary = () => {
+const resetPage = () => {
     $("#card-group")[0].innerHTML= "";    
+    $("#library-checkboxes-alert").hide();
+    $("#search-alert").hide();
+}
+
+const searchLibrary = () => {
+    
+    let libraries = retrieveSelectedLibraries();    
+    
+    if (libraries.length == 0) {
+        $("#library-checkboxes-alert").show();
+        return
+    }
+    
+    let search_query = $("#search-input")[0].value;
+    
+    if (search_query == "") {
+        $("#search-alert").show();
+        return
+    }
+    
+    resetPage();
+
     $("#loading").show();
 
-    libraries = retrieveSelectedLibraries();    
-    
     libraries.forEach((library, index) => {
         let search_url = generateSearchAPI(library);
 
