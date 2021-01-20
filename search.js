@@ -2,11 +2,14 @@ let results = null;
 let results_done = false;
 let api_url = "https://libsearcherapi.herokuapp.com";
 
-let library_logo_src = {
-    "VPL": "./assets/vpl.png",
-    "NWPL": "./assets/nwpl.jpg",
-    "RPL": "./assets/rpl.png",
-    "BPL": "./assets/bpl.jpg"
+const generateBibliocommonsDomain = (library) => {
+    let bibliocommons_domains = {
+        "VPL": "vpl",
+        "NWPL": "newwestminster",
+        "RPL": "yourlibrary",
+        "BPL": "burnaby"
+    }
+    return `https://${bibliocommons_domains[library]}.bibliocommons.com`;
 }
 
 const retrieveSelectedLibraries = () => {
@@ -21,11 +24,20 @@ const retrieveSelectedLibraries = () => {
 }
 
 const createContentCards = (results, library) => {
+    let library_logo_src = {
+        "VPL": "./assets/vpl.png",
+        "NWPL": "./assets/nwpl.jpg",
+        "RPL": "./assets/rpl.png",
+        "BPL": "./assets/bpl.jpg"
+    }
+
     let lib_logo = library_logo_src[library];
+    let lib_domain = generateBibliocommonsDomain(library)
 
     results.forEach(content => {
         var template = document.getElementById('template').innerHTML;
         content["lib_logo"] = lib_logo;
+        content["book_link"] = lib_domain + content["book_link"];
 
         var rendered = Mustache.render(template, content);
         $(`#${library}`).append(rendered);                 
@@ -83,8 +95,6 @@ const searchLibrary = () => {
                     currentPage = result["currentPage"]
                     totalPages = result["totalPages"]
 
-                    console.log(search_url);
-
                     if (currentPage != totalPages) {
                         $("#card-group").append(
                             `<button type="button" 
@@ -100,7 +110,6 @@ const searchLibrary = () => {
                     if (index === libraries.length - 1) {
                         $("#loading").hide();
                     }
-
                 }
             }
         });
