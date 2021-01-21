@@ -177,10 +177,11 @@ const searchLibrary = () => {
                         );
                     } 
                     
-                    // when results from all libraries are shown 
-                    if (index === libraries.length - 1) {
-                        $("#loading").hide();
-                    }
+                }
+                
+                // when results from all libraries are shown 
+                if (index === libraries.length - 1) {
+                    $("#loading").hide();
                 }
             },
             error: function () {                
