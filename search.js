@@ -9,7 +9,11 @@ const generateBibliocommonsDomain = (library) => {
         "VPL": "vpl",
         "NWPL": "newwestminster",
         "RPL": "yourlibrary",
-        "BPL": "burnaby"
+        "BPL": "burnaby",
+        "surreyLibraries": "surrey",
+        "NVDPL": "nvdpl",
+        "FVRL": "fvrl",
+        "PMPL": "portmoody"
     }
     return `https://${bibliocommons_domains[library]}.bibliocommons.com`;
 }
@@ -30,7 +34,11 @@ const createContentCards = (results, library) => {
         "VPL": "./assets/vpl.png",
         "NWPL": "./assets/nwpl.jpg",
         "RPL": "./assets/rpl.png",
-        "BPL": "./assets/bpl.jpg"
+        "BPL": "./assets/bpl.jpg",
+        "surreyLibraries": "./assets/spl.jpg",
+        "NVDPL": "./assets/nvdpl.png",
+        "FVRL": "./assets/fvrl.jpg",
+        "PMPL": "./assets/pmpl.png",
     }
 
     let lib_logo = library_logo_src[library];
