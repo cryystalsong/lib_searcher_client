@@ -1,7 +1,6 @@
 let results = null;
 let results_done = false;
-// let api_url = "https://libsearcherapi.herokuapp.com";
-let api_url = "http://127.0.0.1:5000";
+let api_url = "https://libsearcherapi.herokuapp.com";
 
 let libraryCounts = {}
 
@@ -23,10 +22,13 @@ const retrieveSelectedLibraries = () => {
     libraries = []
     
     for (var i = 0; i < $(":checked")["length"]; i++) {
-        library = $(":checked")[i].value;
-        libraries.push(library);
+        if ($(":checked")[i].className == "form-check-input") {
+            library = $(":checked")[i].value;
+            libraries.push(library);
+        }
     }
 
+    Cookies.set("libraries", libraries);
     return libraries
 }
 
@@ -112,7 +114,7 @@ const resetPage = () => {
 
 const searchLibrary = () => {
     
-    let libraries = retrieveSelectedLibraries();    
+    let libraries = retrieveSelectedLibraries();   
     
     if (libraries.length == 0) {
         $("#library-checkboxes-alert").show();
@@ -211,3 +213,17 @@ const searchLibrary = () => {
         });
     });
 }
+
+const getCookies = () => {
+    cached_libraries = Cookies.get("libraries");
+    cached_libraries = JSON.parse(cached_libraries);
+    cached_libraries.forEach((lib)=>{
+        if ($(`#${lib}`).length) {
+            $(`#${lib}`)[0].checked = true;
+        }
+    });
+}
+
+$(document).ready(()=>{
+    getCookies();
+});
