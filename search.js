@@ -1,6 +1,7 @@
 let results = null;
 let results_done = false;
-let api_url = "https://libsearcherapi.herokuapp.com";
+// let api_url = "https://libsearcherapi.herokuapp.com";
+let api_url = "http://127.0.0.1:5000";
 
 let libraryCounts = {}
 
@@ -48,6 +49,12 @@ const createContentCards = (results, library) => {
         var template = document.getElementById('template').innerHTML;
         content["lib_logo"] = lib_logo;
         content["book_link"] = lib_domain + content["book_link"];
+        
+        if (content["availability"].includes("Available")) {
+            content["bg_style"] = "text-success";   
+        } else if (content["availability"] == "All copies in use") {
+            content["bg_style"] = "text-danger";
+        }
 
         var rendered = Mustache.render(template, content);
         $(`#${library}-cards`).append(rendered);                 
