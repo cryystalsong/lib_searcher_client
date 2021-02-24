@@ -114,6 +114,14 @@ const resetPage = () => {
     $("#search-alert").hide();
 }
 
+const handleKeyPress = (e) => {
+    var keyCode=e.keyCode || e.which;
+
+    if (keyCode==13 || e.key == "Enter"){
+        searchLibrary();
+    }
+}
+
 const searchLibrary = () => {
     
     let libraries = retrieveSelectedLibraries();   
