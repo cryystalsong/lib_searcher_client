@@ -51,6 +51,8 @@ const createContentCards = (results, library) => {
         var template = document.getElementById('template').innerHTML;
         content["lib_logo"] = lib_logo;
         content["book_link"] = lib_domain + content["book_link"];
+        book_title = content["title"].replace(/ /g, "+");
+        content["amzn_link"] = `https://www.amazon.ca/s?k=${book_title}&linkCode=w13&tag=libsearcher-20`;
         
         if (content["availability"].includes("Available")) {
             content["bg_style"] = "text-success";   

@@ -35,23 +35,28 @@
     <link rel="stylesheet" href="style.css">
     
     <script id="template" type="x-tmpl-mustache">
-        <div class="card">
+        <div class="card mb-4" style="max-width: 50rem">
             <a href={{book_link}} target="_blank">
-                <div class="card mb-4 {{bg_style}}" style="max-width: 50rem">
+                <div class="card">
                     <div class="row g-0">
                         <div class="col-md-3">
                             <img src={{img_src}}
                             alt="..." class="content-img" style="max-width:150px;max-height:200px;width:auto;height:auto"/>
                         </div>
                         <div class="col-md-8">
-                            <div class="content-body">
+                            <div class="content-body {{bg_style}}">
                                 <h5 class="content-title">{{title}}</h5>
                                 <h6 class="content-author">{{author}}</h6>
                                 <p class="card-text">
                                     <small class="content-type-detail">{{book_type_detail}}</small>
                                 </p>
                                 <div class="row">
-                                    <h6 class="content-availability col-md">{{availability}}</h6>
+                                    <div class="col-md">
+                                        <h6 class="content-availability col-md">{{availability}}</h6>
+                                        <object>
+                                            <a href={{amzn_link}} target="_blank">Buy at Amazon</a>
+                                        </object>
+                                    </div>
                                     <div class="col-md">
                                         <img src={{lib_logo}} style="max-width:100px;max-height:55px;width:auto;height:auto" />
                                     </div>
