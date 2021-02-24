@@ -4,6 +4,11 @@ let api_url = "https://libsearcherapi.herokuapp.com";
 
 let libraryCounts = {}
 
+const generateAmazonLink = (search_keywords) => {        
+    search_keywords = search_keywords.replace(/ /g, "+");
+    return `https://www.amazon.ca/s?k=${search_keywords}&linkCode=w13&tag=libsearcher-20`;
+}
+
 const generateBibliocommonsDomain = (library) => {
     let bibliocommons_domains = {
         "VPL": "vpl",
@@ -51,13 +56,14 @@ const createContentCards = (results, library) => {
         var template = document.getElementById('template').innerHTML;
         content["lib_logo"] = lib_logo;
         content["book_link"] = lib_domain + content["book_link"];
-        book_title = content["title"].replace(/ /g, "+");
-        content["amzn_link"] = `https://www.amazon.ca/s?k=${book_title}&linkCode=w13&tag=libsearcher-20`;
+        content["amzn_link"] = generateAmazonLink(content["title"]);
         
         if (content["availability"].includes("Available")) {
             content["bg_style"] = "text-success";   
+            content["amzn_display"] = "display: none";
         } else if (content["availability"] == "All copies in use") {
             content["bg_style"] = "text-danger";
+            content["amzn_display"] = "";
         }
 
         var rendered = Mustache.render(template, content);
@@ -148,8 +154,6 @@ const searchLibrary = () => {
         $.ajax({
             url: search_url,
             success: function (result) {
-                console.log(result);
-
                 let total_result_count = result["total_result_count"]
                 let current_result_count = result["current_result_count"]
                 let library = result["library"]
@@ -158,9 +162,35 @@ const searchLibrary = () => {
                     $("#card-group")
                         .append($(`<h3 id=${library}-result-count-text class="library-result-count-text">`)
                         .text(
-                            `${total_result_count} total results from ${library}`
+                            `There are no results found at ${library} at this time`
                             )
                         );
+
+                    $(`#${library}-result-count-text`)
+                        .append($(
+                            ` 
+                            <h5>
+                            Consider 
+                                <a href=${generateAmazonLink(search_query)} target="_blank">
+                                    purchasing on Amazon,
+                                </a>
+                            a small percentage of your purchase will go towards supporting this website. Thank you!
+                            </h5>                           
+                            `
+                            )
+                        );
+                        
+                    $(`#${library}-result-count-text`)
+                        .append($(
+                            `
+                            <a href=${generateAmazonLink(search_query)} target="_blank">
+                                <img src="./assets/available_at_amazon.png" alt="..." class="content-img" style="max-width:150px;max-height:200px;width:auto;height:auto"/>
+                            </a>
+                            `
+                            )
+                        );
+
+
                 } else {
                     $("#card-group")
                         .append($(`<h3 id=${library}-result-count-text class="library-result-count-text">`)
